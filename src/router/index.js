@@ -1,14 +1,15 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
-
+import Team from '../views/Team.vue'
+import Dashboard from '../views/Dashboard.vue'
+import Projects from '../views/Projects.vue'
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'home',
-    component: Home
+    name: 'dashboard',
+    component: Dashboard
   },
   {
     path: '/about',
@@ -17,6 +18,15 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+  },
+  {
+    path: '/projects',
+    name: 'projects',
+    component: Projects
+  }, {
+    path: '/team',
+    name: 'team',
+    component: Team
   }
 ]
 
