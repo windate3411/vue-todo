@@ -17,8 +17,9 @@
     </v-toolbar>
 
     <!-- side bar content -->
-    <v-navigation-drawer app v-model="drawer" temporary absolute>
-      <p class="success">test</p>
+    <v-navigation-drawer app v-model="drawer" temporary absolute class="info">
+      <p class="error">test</p>
+      <v-icon>mdi-email</v-icon>
     </v-navigation-drawer>
   </nav>
 </template>
