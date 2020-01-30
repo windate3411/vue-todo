@@ -1,8 +1,19 @@
 <template>
   <div class="dashboard">
     <h1 class="subtitle-1 grey--text">Dashboard</h1>
-    <!-- list all the projects -->
     <v-container class="grey lighten-5">
+      <!-- add sorting options -->
+      <v-row class="mb-2">
+        <v-btn small text color="grey" @click="sortBy('title')">
+          <v-icon small left>mdi-folder</v-icon>
+          <span class="caption text-lowercase">By project names</span>
+        </v-btn>
+        <v-btn small text color="grey" @click="sortBy('person')">
+          <v-icon small left>mdi-account</v-icon>
+          <span class="caption text-lowercase">By person names</span>
+        </v-btn>
+      </v-row>
+      <!-- list all the projects -->
       <v-card flat class="pa-3 mb-2" v-for="(project,index) in projects" :key="index">
         <v-row :class="`pa-3 project ${project.status}`">
           <v-col cols="12" md="6">
@@ -44,6 +55,11 @@ export default {
         { title: 'Design video thumbnails', person: 'Ryu', due: '20th Dec 2018', status: 'complete', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!' },
         { title: 'Create a community forum', person: 'Gouken', due: '20th Oct 2018', status: 'overdue', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!' },
       ]
+    }
+  },
+  methods: {
+    sortBy(prop) {
+      this.projects.sort((a, b) => a[prop] < b[prop] ? -1 : 1)
     }
   },
 }
