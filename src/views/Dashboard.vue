@@ -1,17 +1,29 @@
 <template>
   <div class="dashboard">
     <h1 class="subtitle-1 grey--text">Dashboard</h1>
-    <v-container class="grey lighten-5">
+    <v-container>
       <!-- add sorting options -->
       <v-row class="mb-2">
-        <v-btn small text color="grey" @click="sortBy('title')">
-          <v-icon small left>mdi-folder</v-icon>
-          <span class="caption text-lowercase">By project names</span>
-        </v-btn>
-        <v-btn small text color="grey" @click="sortBy('person')">
-          <v-icon small left>mdi-account</v-icon>
-          <span class="caption text-lowercase">By person names</span>
-        </v-btn>
+        <v-tooltip top>
+          <!-- add tool tips -->
+          <template v-slot:activator="{ on }">
+            <v-btn small text color="grey" v-on="on" @click="sortBy('title')">
+              <v-icon small left>mdi-folder</v-icon>
+              <span class="caption text-lowercase">By project names</span>
+            </v-btn>
+          </template>
+          <span>Sort by project names</span>
+        </v-tooltip>
+        <v-tooltip top>
+          <!-- add tool tips -->
+          <template v-slot:activator="{ on }">
+            <v-btn small text color="grey" dark v-on="on" @click="sortBy('person')">
+              <v-icon small left>mdi-account</v-icon>
+              <span class="caption text-lowercase">By person names</span>
+            </v-btn>
+          </template>
+          <span>Sort by project names</span>
+        </v-tooltip>
       </v-row>
       <!-- list all the projects -->
       <v-card flat class="pa-3 mb-2" v-for="(project,index) in projects" :key="index">
