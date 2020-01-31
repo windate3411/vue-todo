@@ -7,9 +7,19 @@
       <v-card>
         <v-card-title class="headline grey lighten-2">Add a New Project</v-card-title>
         <v-card-text>
-          <v-form class="px-3 text-center">
-            <v-text-field label="Title" v-model="title" prepend-icon="mdi-folder"></v-text-field>
-            <v-textarea label="Information" v-model="content" prepend-icon="mdi-pencil"></v-textarea>
+          <v-form class="px-3 text-center" ref="form">
+            <v-text-field
+              label="Title"
+              v-model="title"
+              prepend-icon="mdi-folder"
+              :rules="inputRules"
+            ></v-text-field>
+            <v-textarea
+              label="Information"
+              v-model="content"
+              prepend-icon="mdi-pencil"
+              :rules="inputRules"
+            ></v-textarea>
             <!-- add datepicker -->
             <v-menu max-width="290">
               <template v-slot:activator="{ on }">
@@ -18,6 +28,7 @@
                   label="Due date"
                   prepend-icon="mdi-calendar-range"
                   v-on="on"
+                  :rules="inputRules"
                 ></v-text-field>
               </template>
               <v-date-picker v-model="due"></v-date-picker>
@@ -39,12 +50,19 @@ export default {
     return {
       title: '',
       content: '',
-      due: null
+      due: null,
+      inputRules: [
+        value => !!value || 'Required.',
+        v => v.length >= 3 || "You must type in at least 3 charaters"
+      ]
     }
   },
   methods: {
     submit() {
-      console.log(`${this.content}`)
+      if (this.$refs.form.validate()) {
+        console.log(`${this.content}`)
+      }
+
     }
   },
   computed: {
