@@ -62,7 +62,7 @@
                 <v-icon>mdi-pencil</v-icon>
               </v-btn>
               <v-btn small fab color="error">
-                <v-icon>mdi-delete</v-icon>
+                <v-icon @click="deleteProject(project.id)">mdi-delete</v-icon>
               </v-btn>
             </div>
           </v-col>
@@ -78,19 +78,7 @@ import db from '@/fb.js'
 export default {
   name: 'dashboard',
   created() {
-    this.isLoading = true
-    db.collection('projects').onSnapshot(res => {
-      const changes = res.docChanges()
-      changes.forEach(element => {
-        if (element.type === "added") {
-          this.projects.push({
-            ...element.doc.data(),
-            id: element.doc.id
-          })
-        }
-      });
-      this.isLoading = false
-    })
+    this.fetchProjects()
   },
   data() {
     return {
@@ -101,8 +89,28 @@ export default {
   methods: {
     sortBy(prop) {
       this.projects.sort((a, b) => a[prop] < b[prop] ? -1 : 1)
+    },
+    deleteProject(id) {
+      db.collection('projects').doc(id).delete();
+      this.projects = []
+      this.fetchProjects();
+    },
+    fetchProjects() {
+      this.isLoading = true
+      db.collection('projects').onSnapshot(res => {
+        const changes = res.docChanges()
+        changes.forEach(element => {
+          if (element.type === "added") {
+            this.projects.push({
+              ...element.doc.data(),
+              id: element.doc.id
+            })
+          }
+        });
+        this.isLoading = false
+      })
     }
-  },
+  }
 }
 </script>
 
