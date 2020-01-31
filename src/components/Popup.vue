@@ -75,6 +75,7 @@ export default {
           await db.collection('projects').add(project)
           this.loading = false
           this.dialog = false
+          this.$emit('afterAdded')
         } catch (error) {
           console.log(error)
         }
