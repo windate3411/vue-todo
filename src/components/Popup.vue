@@ -44,6 +44,7 @@
 <script>
 import format from 'date-fns/format'
 import parseISO from 'date-fns/parseISO'
+import db from '@/fb.js';
 
 export default {
   data() {
@@ -58,9 +59,17 @@ export default {
     }
   },
   methods: {
-    submit() {
+    async submit() {
       if (this.$refs.form.validate()) {
-        console.log(`${this.content}`)
+        const project = {
+          title: this.title,
+          content: this.content,
+          due: format(parseISO(this.due), 'do MMM yyyy'),
+          person: 'Danny',
+          status: 'ongoing'
+        }
+
+        await db.collection('projects').add(project)
       }
 
     }
