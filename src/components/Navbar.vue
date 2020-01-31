@@ -47,7 +47,7 @@
         </v-col>
         <!-- Popup -->
         <div class="mt-3 mb-4">
-          <Popup @afterAdded="snackbar=true" />
+          <Popup @afterAdded="snackbar=true" :isNew="isNew" :project="project" />
         </div>
       </v-row>
       <v-divider></v-divider>
@@ -82,7 +82,14 @@ export default {
         { icon: 'mdi-folder', text: 'My Projects', route: '/projects' },
         { icon: 'mdi-account', text: 'Team', route: '/team' },
       ],
-      snackbar: false
+      snackbar: false,
+      isNew: true,
+      project: {
+        content: '',
+        title: '',
+        due: null,
+        status: ''
+      }
     }
   },
 }

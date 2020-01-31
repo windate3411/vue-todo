@@ -58,9 +58,7 @@
           </v-col>
           <v-col cols="2">
             <div class="buttons d-flex">
-              <v-btn class="mr-2" small fab color="info">
-                <v-icon>mdi-pencil</v-icon>
-              </v-btn>
+              <Popup :project="project" @afterEdited="fetchProjects" />
               <v-btn small fab color="error">
                 <v-icon @click="deleteProject(project.id)">mdi-delete</v-icon>
               </v-btn>
@@ -74,9 +72,12 @@
 
 <script>
 import db from '@/fb.js'
-
+import Popup from '../components/Popup.vue'
 export default {
   name: 'dashboard',
+  components: {
+    Popup
+  },
   created() {
     this.fetchProjects()
   },
@@ -92,10 +93,10 @@ export default {
     },
     deleteProject(id) {
       db.collection('projects').doc(id).delete();
-      this.projects = []
       this.fetchProjects();
     },
     fetchProjects() {
+      this.projects = []
       this.isLoading = true
       db.collection('projects').onSnapshot(res => {
         const changes = res.docChanges()
