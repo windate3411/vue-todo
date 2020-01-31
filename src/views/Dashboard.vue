@@ -33,9 +33,9 @@
         </v-tooltip>
       </v-row>
       <!-- list all the projects -->
-      <v-card flat class="pa-3 mb-2" v-for="(project,index) in projects" :key="index">
+      <v-card flat class="pa-3 mb-2" v-for="(project) in projects" :key="project.id">
         <v-row :class="`pa-3 project ${project.status}`">
-          <v-col cols="12" md="6">
+          <v-col cols="12" md="4">
             <div class="caption grey--text">Project Title</div>
             <div class>{{project.title}}</div>
           </v-col>
@@ -47,13 +47,23 @@
             <div class="caption grey--text">Due By</div>
             <div class>{{project.due}}</div>
           </v-col>
-          <v-col cols="2" sm="4" md="2">
+          <v-col cols="3" sm="4" md="2">
             <div class="right">
               <v-chip
                 small
                 :color="`${project.status}`"
                 class="v-chip--active white--text caption my-2"
               >{{project.status}}</v-chip>
+            </div>
+          </v-col>
+          <v-col cols="2">
+            <div class="buttons d-flex">
+              <v-btn class="mr-2" small fab color="info">
+                <v-icon>mdi-pencil</v-icon>
+              </v-btn>
+              <v-btn small fab color="error">
+                <v-icon>mdi-delete</v-icon>
+              </v-btn>
             </div>
           </v-col>
         </v-row>
