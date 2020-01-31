@@ -1,6 +1,6 @@
 <template>
   <div class="text-center">
-    <v-dialog width="500">
+    <v-dialog width="500" v-model="dialog">
       <template v-slot:activator="{ on }">
         <v-btn class="success" dark v-on="on">Add New Project</v-btn>
       </template>
@@ -33,7 +33,7 @@
               </template>
               <v-date-picker v-model="due"></v-date-picker>
             </v-menu>
-            <v-btn text class="mx-0 mt-3 success" @click="submit">Add new project</v-btn>
+            <v-btn text class="mx-0 mt-3 success" @click="submit" :loading="loading">Add new project</v-btn>
           </v-form>
         </v-card-text>
       </v-card>
@@ -55,11 +55,14 @@ export default {
       inputRules: [
         value => !!value || 'Required.',
         v => v.length >= 3 || "You must type in at least 3 charaters"
-      ]
+      ],
+      loading: false,
+      dialog: false
     }
   },
   methods: {
     async submit() {
+      this.loading = true
       if (this.$refs.form.validate()) {
         const project = {
           title: this.title,
@@ -68,8 +71,13 @@ export default {
           person: 'Danny',
           status: 'ongoing'
         }
-
-        await db.collection('projects').add(project)
+        try {
+          await db.collection('projects').add(project)
+          this.loading = false
+          this.dialog = false
+        } catch (error) {
+          console.log(error)
+        }
       }
 
     }
