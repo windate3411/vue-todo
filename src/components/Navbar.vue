@@ -40,6 +40,10 @@
           </v-avatar>
           <div class="p white--text subtitle-2 mt-2 ml-2">Danny Wang</div>
         </v-col>
+        <!-- Popup -->
+        <div class="mt-3 mb-4">
+          <Popup />
+        </div>
       </v-row>
       <v-divider></v-divider>
       <!-- list contents -->
@@ -58,8 +62,13 @@
 </template>
 
 <script>
+import Popup from './Popup.vue'
+
 export default {
   name: 'Navbar',
+  components: {
+    Popup
+  },
   data() {
     return {
       drawer: false,
