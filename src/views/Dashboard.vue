@@ -2,8 +2,15 @@
   <div class="dashboard">
     <h1 class="subtitle-1 grey--text">Dashboard</h1>
     <v-container>
+      <v-row class="mb-2" v-if="isLoading">
+        <v-col>
+          <div class="spinner text-center">
+            <v-progress-circular indeterminate color="primary" :size="200">Loading...</v-progress-circular>
+          </div>
+        </v-col>
+      </v-row>
       <!-- add sorting options -->
-      <v-row class="mb-2">
+      <v-row class="mb-2" v-else>
         <v-tooltip top>
           <!-- add tool tips -->
           <template v-slot:activator="{ on }">
@@ -61,6 +68,7 @@ import db from '@/fb.js'
 export default {
   name: 'dashboard',
   created() {
+    this.isLoading = true
     db.collection('projects').onSnapshot(res => {
       const changes = res.docChanges()
       changes.forEach(element => {
@@ -71,13 +79,13 @@ export default {
           })
         }
       });
+      this.isLoading = false
     })
   },
   data() {
     return {
-      projects: [
-
-      ]
+      projects: [],
+      isLoading: false
     }
   },
   methods: {
