@@ -4,7 +4,7 @@
     <v-container class="my-5">
       <v-expansion-panels accordion>
         <v-expansion-panel v-for="project in myProjects" :key="project.title">
-          <v-expansion-panel-header>{{project.title}}</v-expansion-panel-header>
+          <v-expansion-panel-header expand-icon="mdi-menu-down">{{project.title}}</v-expansion-panel-header>
           <v-expansion-panel-content class="grey--text">
             <div class="font-weight-bold">due by {{project.due}}</div>
             <div>{{project.content}}</div>

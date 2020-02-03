@@ -2,7 +2,10 @@
   <div class="text-center">
     <v-dialog width="500" v-model="dialog">
       <template v-slot:activator="{ on }">
-        <v-btn v-if="isNew" class="success" dark v-on="on">Add New Project</v-btn>
+        <v-btn v-if="isNew" class="success" dark v-on="on">
+          <v-icon small left>mdi-plus</v-icon>
+          <span class="caption">Add New Project</span>
+        </v-btn>
         <v-btn v-else class="mr-2" small fab color="info" v-on="on">
           <v-icon>mdi-pencil</v-icon>
         </v-btn>
