@@ -32,10 +32,10 @@
         </v-list>
       </v-menu>
       <!-- sign out btn  -->
-      <v-btn text color="grey">
+      <!-- <v-btn text color="grey">
         <span>Sign Out</span>
         <v-icon right>mdi-exit-to-app</v-icon>
-      </v-btn>
+      </v-btn>-->
     </v-app-bar>
 
     <!-- side bar content -->
