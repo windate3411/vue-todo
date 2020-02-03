@@ -83,7 +83,8 @@ export default {
       loading: false,
       dialog: false,
       statusList: ['ongoing', 'complete', 'overdue'],
-      status: this.project.status
+      status: this.project.status,
+      isValid: false
     }
   },
   methods: {
@@ -105,6 +106,8 @@ export default {
         } catch (error) {
           console.log(error)
         }
+      } else {
+        this.loading = false
       }
     },
     async edit(id) {
@@ -125,6 +128,8 @@ export default {
         } catch (error) {
           console.log(error)
         }
+      } else {
+        this.loading = false
       }
     }
   },
