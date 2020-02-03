@@ -41,7 +41,7 @@
       <v-row class="flex-column" align="center">
         <v-col cols="6" class="mt-5">
           <v-avatar size="100" class="grey lighten-2">
-            <img src="/avatar-1.png" />
+            <img src="/danny.jpg" />
           </v-avatar>
           <div class="p white--text subtitle-2 mt-2 ml-2">Danny Wang</div>
         </v-col>
