@@ -19,6 +19,7 @@ Authentication will be on the next patch. For now the projects you add will be l
 Feel free to leave any conments!
 
 ## Project preview
+![image](https://github.com/windate3411/vue-todo/blob/master/demo-2.PNG)
 
 ## Project Demo
 
