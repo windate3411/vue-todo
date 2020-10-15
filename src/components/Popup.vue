@@ -49,6 +49,7 @@
               :items="statusList"
               label="Status"
               v-model="status"
+              :rules="statusRules"
             ></v-select>
 
             <v-btn
@@ -90,6 +91,7 @@ export default {
         (value) => !!value || 'Required.',
         (v) => v.length >= 3 || 'You must type in at least 3 charaters',
       ],
+      statusRules: [(value) => !!value || 'Required.'],
       loading: false,
       dialog: false,
       statusList: ['ongoing', 'complete', 'overdue'],
@@ -115,6 +117,12 @@ export default {
           this.$emit('afterAdded')
         } catch (error) {
           console.log(error)
+        } finally {
+          this.title = ''
+          this.content = ''
+          this.status = ''
+          this.due = null
+          this.$refs.form.resetValidation()
         }
       } else {
         this.loading = false
